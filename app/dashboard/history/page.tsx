@@ -23,8 +23,7 @@ export default function HistoryPage() {
       if (savedLaundry) {
         const laundry = JSON.parse(savedLaundry)
         setAllLaundry(laundry)
-        
-        const total = laundry.reduce((sum, item) => sum + item.amount, 0)
+        const total = laundry.reduce((sum: number, item: any) => sum + item.amount, 0)
         setTotalSpent(total)
       }
     }

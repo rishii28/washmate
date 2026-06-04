@@ -31,8 +31,57 @@ The system provides:
 * Email Notifications
 
 ---
+5. Screenshots
 
-5. Features
+##  Screenshots
+
+### Login & Register
+
+![Login & Register](./public/screenshots/login-register.png)
+
+### Customer Dashboard
+
+![Customer Dashboard](./public/screenshots/dashboard.png)
+
+
+### Transaction History
+
+![Transaction History](./public/screenshots/history.png)
+
+### Payment Page
+
+![Payment Page](./public/screenshots/payment-page.png)
+
+### Payment Verification
+
+![Payment Verification](./public/screenshots/payment-verification.png)
+
+
+### Admin Dashboard
+
+![Admin Dashboard](./public/screenshots/admin-dashboard.png)
+
+### Customer Management
+
+![Customer Management](./public/screenshots/customers.png)
+
+### Laundry Records
+
+![Laundry Records](./public/screenshots/record.png)
+
+### Customer Approval
+
+![Customer Approval](./public/screenshots/customer-approval.png)
+
+### Revenue Dashboard
+
+![Revenue Dashboard](./public/screenshots/revenue.png)
+
+### Email Notifications
+
+![Email Notifications](./public/screenshots/email-respones.png)
+
+6. Features
 
  Customer Portal
 
@@ -44,7 +93,7 @@ The system provides:
 * Profile Management
 * Responsive Mobile-Friendly Design
 
-6. Admin Portal
+7. Admin Portal
 
 * Customer Management
 * Approve Customer Registrations
@@ -56,14 +105,14 @@ The system provides:
 * WhatsApp Broadcast Support
 
 
-7. Laundry Workflow
+8. Laundry Workflow
 
 Received → Ready → Completed
 
 Customers can monitor the status of their laundry in real time through the dashboard.
 
 
-8. Payment Management
+9. Payment Management
 
 * Online Payment Support
 * Payment Verification Workflow
@@ -72,7 +121,7 @@ Customers can monitor the status of their laundry in real time through the dashb
 * Customer Billing Records
 
 
-9. 🛠 Tech Stack
+10. 🛠 Tech Stack
 
 ### Frontend
 
@@ -152,4 +201,5 @@ Open:
 
 http://localhost:3000
 
-Thankyou.
+Thankyou. 
+

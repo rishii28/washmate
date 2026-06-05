@@ -25,7 +25,7 @@ export default function HistoryPage() {
         
         let total = 0
         for (let i = 0; i < laundry.length; i++) {
-          total = total + laundry[i].amount
+          total = total + (laundry[i].amount || 0)
         }
         setTotalSpent(total)
       }
@@ -52,7 +52,7 @@ export default function HistoryPage() {
           <td style="border: 1px solid #ddd; padding: 8px;">${item.pickupStatus === 'Picked Up' ? 'Yes' : 'No'}</td>
           <td style="border: 1px solid #ddd; padding: 8px;">${item.pickupDate || '-'}</td>
           <td style="border: 1px solid #ddd; padding: 8px; text-align: right;">₹${item.amount}</td>
-         </tr>
+        </tr>
       `
     }
 
@@ -97,12 +97,12 @@ export default function HistoryPage() {
               <th>Picked Up</th>
               <th>Pickup Date</th>
               <th>Amount (₹)</th>
-             </tr>
+            </tr>
           </thead>
           <tbody>
             ${tableRows}
           </tbody>
-        </table>
+        </tr>
         
         <div class="total">
           Total Amount Spent: ₹${totalSpent}

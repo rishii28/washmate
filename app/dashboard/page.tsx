@@ -40,7 +40,7 @@ export default function Dashboard() {
             const DEMO_RECORDS = [
               { id: Date.now(), date: '2026-06-01', pairs: 5, singles: 1, status: 'Received', amount: 110, pickupStatus: null, pickupDate: null, serviceType: 'Clothes' },
               { id: Date.now() + 1, date: '2026-06-02', pairs: 10, singles: 0, status: 'Ready', amount: 200, pickupStatus: null, pickupDate: null, serviceType: 'Clothes' },
-              { id: Date.now() + 2, date: '2026-06-03', pairs: 2, singles: 0, status: 'Completed', amount: 100, pickupStatus: 'Picked Up', pickupDate: '2026-06-03', serviceType: 'Blanket' }
+              { id: Date.now() + 2, date: '2026-06-03', pairs: 2, singles: 0, status: 'Picked Up', amount: 100, pickupStatus: 'Picked Up', pickupDate: '2026-06-03', serviceType: 'Blanket' }
             ]
             localStorage.setItem(laundryKey, JSON.stringify(DEMO_RECORDS))
             setLaundryItems(DEMO_RECORDS)
@@ -67,7 +67,8 @@ export default function Dashboard() {
   const calculatePendingCount = () => {
     let count = 0
     for (let i = 0; i < laundryItems.length; i++) {
-      if (laundryItems[i].status !== 'Completed' && laundryItems[i].pickupStatus !== 'Picked Up') {
+      // Count items that are not cleared (still have pending amount)
+      if (laundryItems[i].status !== 'Cleared') {
         count++
       }
     }
@@ -309,17 +310,21 @@ export default function Dashboard() {
                       <td className="px-4 py-3 text-sm text-gray-600">{item.singles || 0}</td>
                       <td className="px-4 py-3">
                         <span className={`inline-flex px-2 py-1 text-xs font-medium rounded-full ${
-                          item.pickupStatus === 'Picked Up' 
+                          item.status === 'Cleared' 
                             ? 'bg-gray-100 text-gray-500'
-                            : item.status === 'Ready' 
-                              ? 'bg-green-100 text-green-600' 
-                              : 'bg-amber-100 text-amber-600'
+                            : item.pickupStatus === 'Picked Up' 
+                              ? 'bg-blue-100 text-blue-600'
+                              : item.status === 'Ready' 
+                                ? 'bg-green-100 text-green-600' 
+                                : 'bg-amber-100 text-amber-600'
                         }`}>
-                          {item.pickupStatus === 'Picked Up' 
-                            ? '✅ Completed' 
-                            : item.status === 'Ready' 
-                              ? '🟢 Ready for Pickup' 
-                              : '📦 Received'}
+                          {item.status === 'Cleared' 
+                            ? '✅ Cleared' 
+                            : item.pickupStatus === 'Picked Up' 
+                              ? '📦 Picked Up' 
+                              : item.status === 'Ready' 
+                                ? '🟢 Ready for Pickup' 
+                                : '📦 Received'}
                         </span>
                       </td>
                       <td className="px-4 py-3 text-sm text-gray-600">
@@ -328,6 +333,8 @@ export default function Dashboard() {
                             <span className="text-green-600 text-xs">✓ Picked</span>
                             <p className="text-xs text-gray-400">{item.pickupDate}</p>
                           </div>
+                        ) : item.status === 'Cleared' ? (
+                          <span className="text-gray-400 text-xs">Payment Done</span>
                         ) : item.status === 'Ready' ? (
                           <span className="text-blue-500 text-xs">Waiting for pickup</span>
                         ) : (
@@ -335,7 +342,7 @@ export default function Dashboard() {
                         )}
                       </td>
                       <td className="px-4 py-3 text-sm font-medium text-gray-700">₹{item.amount}</td>
-                    </td>
+                    </tr>
                   ))
                 )}
               </tbody>

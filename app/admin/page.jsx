@@ -701,8 +701,8 @@ export default function AdminPanel() {
                             <>
                               <input type="number" value={singles} onChange={(e) => setSingles(e.target.value)} placeholder="Single Pieces" className="w-full px-3 py-2 border rounded-lg" />
                               <select value={pricePerPair} onChange={(e) => setPricePerPair(e.target.value)} className="w-full px-3 py-2 border rounded-lg">
-                                <option value="20">₹20 per pair (Regular)</option>
-                                <option value="15">₹15 per pair (Student)</option>
+                                <option value="20">₹20 per pair </option>
+                                <option value="15">₹15 per pair </option>
                               </select>
                             </>
                           )}

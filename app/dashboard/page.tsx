@@ -335,7 +335,7 @@ export default function Dashboard() {
                         )}
                       </td>
                       <td className="px-4 py-3 text-sm font-medium text-gray-700">₹{item.amount}</td>
-                    </tr>
+                    </td>
                   ))
                 )}
               </tbody>
@@ -355,8 +355,8 @@ export default function Dashboard() {
           </div>
         </div>
 
-        {/* Payment Section */}
-        {laundryItems.filter(item => item.pickupStatus !== 'Picked Up').length > 0 && !showPayment && (
+        {/* Payment Section - Shows if there is any pending amount */}
+        {calculateTotalAmount() > 0 && !showPayment && (
           <div className="mt-6 flex justify-center">
             <button
               onClick={() => setShowPayment(true)}

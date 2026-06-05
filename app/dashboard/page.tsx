@@ -65,10 +65,10 @@ export default function Dashboard() {
   }
 
   const calculatePendingCount = () => {
+    // Count items that still have unpaid amount (amount > 0)
     let count = 0
     for (let i = 0; i < laundryItems.length; i++) {
-      // Count items that are not cleared (still have pending amount)
-      if (laundryItems[i].status !== 'Cleared') {
+      if (laundryItems[i].amount > 0) {
         count++
       }
     }

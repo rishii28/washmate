@@ -701,9 +701,9 @@ export default function AdminPanel() {
                             <>
                               <input type="number" value={singles} onChange={(e) => setSingles(e.target.value)} placeholder="Single Pieces" className="w-full px-3 py-2 border rounded-lg" />
                               <select value={pricePerPair} onChange={(e) => setPricePerPair(e.target.value)} className="w-full px-3 py-2 border rounded-lg">
-                                <option value="20">₹20 per pair </option>
-                                <option value="15">₹15 per pair </option>
-                              </select>
+  <option value="20">₹20</option>
+  <option value="15">₹15</option>
+</select>
                             </>
                           )}
                           <button onClick={addLaundry} className="w-full bg-green-500 text-white py-2 rounded-lg hover:bg-green-600">➕ Add Laundry</button>

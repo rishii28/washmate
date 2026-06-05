@@ -6,9 +6,9 @@ import Footer from '@/components/Footer'
 
 export default function HistoryPage() {
   const router = useRouter()
-  const [user, setUser] = useState<any>(null)
+  const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
-  const [allLaundry, setAllLaundry] = useState<any[]>([])
+  const [allLaundry, setAllLaundry] = useState([])
   const [totalSpent, setTotalSpent] = useState(0)
 
   useEffect(() => {
@@ -23,9 +23,10 @@ export default function HistoryPage() {
         const laundry = JSON.parse(savedLaundry)
         setAllLaundry(laundry)
         
-        const total = laundry.reduce((sum: number, item: any) => {
-          return sum + (item.amount || 0)
-        }, 0)
+        let total = 0
+        for (let i = 0; i < laundry.length; i++) {
+          total = total + laundry[i].amount
+        }
         setTotalSpent(total)
       }
     }
@@ -40,8 +41,9 @@ export default function HistoryPage() {
     const today = new Date().toLocaleDateString()
     
     let tableRows = ''
-    allLaundry.forEach((item: any) => {
-      tableRows += `
+    for (let i = 0; i < allLaundry.length; i++) {
+      const item = allLaundry[i]
+      tableRows = tableRows + `
         <tr>
           <td style="border: 1px solid #ddd; padding: 8px;">${item.date}</td>
           <td style="border: 1px solid #ddd; padding: 8px;">${item.pairs}</td>
@@ -50,12 +52,11 @@ export default function HistoryPage() {
           <td style="border: 1px solid #ddd; padding: 8px;">${item.pickupStatus === 'Picked Up' ? 'Yes' : 'No'}</td>
           <td style="border: 1px solid #ddd; padding: 8px;">${item.pickupDate || '-'}</td>
           <td style="border: 1px solid #ddd; padding: 8px; text-align: right;">₹${item.amount}</td>
-        </tr>
+         </tr>
       `
-    })
+    }
 
-    const htmlContent = `
-      <!DOCTYPE html>
+    const htmlContent = `<!DOCTYPE html>
       <html>
       <head>
         <title>Laundry History - ${user?.name}</title>
@@ -96,7 +97,7 @@ export default function HistoryPage() {
               <th>Picked Up</th>
               <th>Pickup Date</th>
               <th>Amount (₹)</th>
-            </tr>
+             </tr>
           </thead>
           <tbody>
             ${tableRows}
@@ -152,7 +153,6 @@ export default function HistoryPage() {
       className="min-h-screen flex flex-col"
       style={{ background: 'linear-gradient(to bottom right, #e0e7ff, #ffffff, #f3e8ff)' }}
     >
-      {/* Navbar */}
       <nav className="bg-white/80 backdrop-blur-sm shadow-sm border-b border-indigo-100 sticky top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 py-3">
           <div className="flex justify-between items-center">
@@ -173,7 +173,6 @@ export default function HistoryPage() {
       </nav>
 
       <div className="flex-1 max-w-7xl mx-auto px-4 py-6">
-        {/* Header */}
         <div className="mb-6 flex justify-between items-center flex-wrap gap-4">
           <div>
             <h2 className="text-2xl font-semibold text-gray-700">
@@ -191,7 +190,6 @@ export default function HistoryPage() {
           )}
         </div>
 
-        {/* Customer Info Card */}
         <div className="bg-white rounded-xl shadow-lg p-6 border border-indigo-100 mb-6">
           <h3 className="text-lg font-medium text-gray-700 mb-3">👤 Customer Information</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -206,7 +204,6 @@ export default function HistoryPage() {
           </div>
         </div>
 
-        {/* History Table */}
         <div className="bg-white rounded-xl shadow-lg overflow-hidden border border-indigo-100">
           <div className="px-6 py-4 border-b bg-gradient-to-r from-indigo-50 to-purple-50">
             <h3 className="text-lg font-medium text-gray-700">📋 All Laundry Records</h3>
@@ -231,8 +228,8 @@ export default function HistoryPage() {
                   </tr>
                 </thead>
                 <tbody>
-                  {allLaundry.map((item: any, index: number) => (
-                    <tr key={item.id} className={`border-t border-indigo-50 hover:bg-indigo-50/30 transition-colors ${index % 2 === 0 ? 'bg-white' : 'bg-gray-50'}`}>
+                  {allLaundry.map((item, index) => (
+                    <tr key={item.id} className="border-t border-indigo-50 hover:bg-indigo-50/30 transition-colors">
                       <td className="px-4 py-3 text-sm text-gray-600">{item.date}</td>
                       <td className="px-4 py-3 text-sm text-gray-600">{item.pairs}</td>
                       <td className="px-4 py-3 text-sm text-gray-600">{item.singles || 0}</td>
@@ -259,7 +256,7 @@ export default function HistoryPage() {
                 </tbody>
                 <tfoot className="bg-indigo-50 border-t border-indigo-100">
                   <tr>
-                    <td colSpan={6} className="px-4 py-3 text-right font-medium text-gray-600">
+                    <td colSpan="6" className="px-4 py-3 text-right font-medium text-gray-600">
                       Total Spent:
                     </td>
                     <td className="px-4 py-3 text-lg font-bold text-orange-600">
@@ -272,7 +269,6 @@ export default function HistoryPage() {
           )}
         </div>
 
-        {/* Back Button */}
         <div className="mt-6 flex justify-center">
           <button
             onClick={handleBack}
